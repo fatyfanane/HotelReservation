@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Ajouter une chambre</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <style>
+        /* Input container */
+        .input-container {
+            position: relative;
+            margin: 20px;
+        }
+
+        /* Input field */
+        .input-field {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #ccc;
+            outline: none;
+            background-color: transparent;
+        }
+
+        /* Input label */
+        .input-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            font-size: 16px;
+            color: rgba(204, 204, 204, 0);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Input highlight */
+        .input-highlight {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 0;
+            background-color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        /* Input field:focus styles */
+        .input-field:focus + .input-label {
+            top: -20px;
+            font-size: 12px;
+            color: #007bff;
+        }
+
+        .input-field:focus + .input-label + .input-highlight {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="container" align="center">
+    <h2>Ajouter une chambre</h2>
+    <form action="/ajouterroom" method="post" th:object="${room}">
+        <div class="mb-3 input-container">
+            <input type="text" class="input-field form-control" th:field="*{roomNumber}">
+            <label class="input-label form-label">Numéro de chambre</label>
+            <span class="text-danger" th:if="${#fields.hasErrors('roomNumber')}" th:errors="*{roomNumber}"></span>
+            <div class="input-highlight"></div>
+        </div>
+        <div class="mb-3 input-container">
+            <input type="number" class="input-field form-control" th:field="*{pricePerNight}">
+            <label class="input-label form-label">Prix par nuit</label>
+            <span class="text-danger" th:if="${#fields.hasErrors('pricePerNight')}" th:errors="*{pricePerNight}"></span>
+            <div class="input-highlight"></div>
+        </div>
+        <div class="mb-3 input-container">
+            <textarea class="input-field form-control" th:field="*{description}"></textarea>
+            <label class="input-label form-label">Description</label>
+            <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            <div class="input-highlight"></div>
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" th:field="*{available}"/>
+            <label class="form-check-label">Disponible</label>
+            <span class="text-danger" th:if="${#fields.hasErrors('available')}" th:errors="*{available}"></span>
+        </div>
+        <button type="submit" class="btn btn-primary form-control w-50" value="Ajouter">Ajouter</button>
+    </form>
+</div>
+</body>
+</html>

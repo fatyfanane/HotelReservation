@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.com"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="templates" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Modifier la chambre</title>
+    <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <h2>Modifier la chambre</h2>
+        <form method="post" th:action="@{/modifierroom}">
+            <input type="hidden" name="id" th:value="${RoomToBeUpdated.id}"/>
+            <div class="mb-3">
+                <label class="form-label">Numéro de chambre</label>
+                <input type="text" class="form-control" name="roomNum" th:value="${RoomToBeUpdated.roomNumber}"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Prix par nuit</label>
+                <input type="number" class="form-control" name="price" th:value="${RoomToBeUpdated.pricePerNight}"/>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea class="form-control" name="description" th:value="${RoomToBeUpdated.description}"></textarea>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" name="available" th:checked="${RoomToBeUpdated.available}"/>
+                <label class="form-check-label">Disponible</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Modifier</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
