@@ -6,41 +6,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f4ff; /* Soft lavender background */
+            background-color: #f8e1f5; /* Light pink background color */
             font-family: 'Arial', sans-serif; /* Use a common font */
+            padding-top: 20px;
         }
 
         .container {
             margin-top: 50px; /* Adjust as needed */
-            border: 1px solid #000; /* Soft pink border */
+            border: 1px solid #f7d4eb; /* Soft pink border */
             border-radius: 10px; /* Rounded corners for container */
             padding: 20px; /* Add padding inside container */
             background-color: #fff; /* White background */
+            max-width: 500px; /* Max width for container */
+            margin: 50px auto; /* Center align the container */
         }
 
         h1 {
-            color: #B22222; /* Light purple heading color */
+            color: #b367a1; /* Light purple heading color */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         p {
-            color: #000000; /* Light purple paragraph color */
-            font-size: 18px; /* Larger font size for better readability */
+            color: #666; /* Light purple paragraph color */
+            margin-bottom: 10px;
         }
 
         .btn {
-            background-color: #ffacd0; /* Soft pink button background color */
             color: #fff; /* White text color */
-            border: none; /* Remove button border */
+            font-weight: bold; /* Bold text */
             transition: background-color 0.3s; /* Smooth transition */
         }
 
         .btn:hover {
-            background-color: #ff85a2; /* Darker pink button background color on hover */
+            color: #fff; /* White text color on hover */
         }
 
-        svg {
-            vertical-align: middle; /* Align SVG icon vertically */
-            margin-right: 5px; /* Add spacing between icon and text */
+        .btn-success {
+            background-color: #28a745; /* Green button background color */
+            border-color: #28a745; /* Green button border color */
+        }
+
+        .btn-success:hover {
+            background-color: #218838; /* Darker green button background color on hover */
+            border-color: #1e7e34; /* Darker green button border color on hover */
+        }
+
+        .btn-danger {
+            background-color: #dc3545; /* Red button background color */
+            border-color: #dc3545; /* Red button border color */
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker red button background color on hover */
+            border-color: #bd2130; /* Darker red button border color on hover */
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn svg {
+            margin-right: 5px;
         }
     </style>
 </head>

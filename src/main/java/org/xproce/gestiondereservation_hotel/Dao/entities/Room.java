@@ -19,11 +19,8 @@ public class Room {
     private Double pricePerNight;
     private Boolean available;
     private String description;
+    private String roomType;
 
 
-    @ManyToMany
-    @JoinTable(name = "room_roomtype",
-            joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "roomtype_id"))
-    private List<RoomType> roomTypes;
+
 }

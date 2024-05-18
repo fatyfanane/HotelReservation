@@ -3,50 +3,122 @@
 <head>
     <meta charset="utf-8"/>
     <title>Détails de la chambre</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f8e1f5;
+            font-family: Arial, sans-serif;
+            padding-top: 20px;
+        }
+
+        .container {
+            border: 1px solid #f7d4eb;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            max-width: 500px;
+            margin: 50px auto;
+        }
+
+        h2 {
+            color: #b367a1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            color: #fff;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            color: #fff;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn svg {
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
-<div layout:fragment="content" class="container">
-    <h2>Détails de la chambre</h2>
-    <dl class="row">
-        <dt class="col-sm-3">ID</dt>
-        <dd class="col-sm-9" th:text="${RoomWithDetails.id}"></dd>
+<div layout:fragment="content">
+    <div class="container">
+        <h2>Room Details</h2>
+        <p>ID: <span th:text="${RoomWithDetails.id}"></span></p>
+        <p>Room Number: <span th:text="${RoomWithDetails.roomNumber}"></span></p>
+        <p>Price Per Night: <span th:text="${RoomWithDetails.pricePerNight}"></span></p>
+        <p>Availability: <span th:text="${RoomWithDetails.available ? 'Available' : 'Not available'}"></span></p>
+        <p>Description: <span th:text="${RoomWithDetails.description}"></span></p>
+        <p>RoomTypes: <span th:text="${RoomWithDetails.roomType}"></span></p>
 
-        <dt class="col-sm-3">Numéro de chambre</dt>
-        <dd class="col-sm-9" th:text="${RoomWithDetails.roomNumber}"></dd>
 
-        <dt class="col-sm-3">Prix par nuit</dt>
-        <dd class="col-sm-9" th:text="${RoomWithDetails.pricePerNight}"></dd>
-
-        <dt class="col-sm-3">Disponibilité</dt>
-        <dd class="col-sm-9" th:text="${RoomWithDetails.available ? 'Disponible' : 'Non disponible'}"></dd>
-
-        <dt class="col-sm-3">Description</dt>
-        <dd class="col-sm-9" th:text="${RoomWithDetails.description}"></dd>
-    </dl>
-
-    <div class="row">
-        <div class="col-md-6">
-            <a class="btn btn-success btn-block"
-               th:href="@{/editroom(id=${RoomWithDetails.id})}"
-               onclick="return confirm('Êtes-vous sûr de vouloir modifier cette chambre ?');">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
-                </svg>
-                Modifier
-            </a>
-        </div>
-        <div class="col-md-6">
-            <a class="btn btn-danger btn-block"
-               th:href="@{/deleteroom(id=${RoomWithDetails.id})}"
-               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?');">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                </svg>
-                Supprimer
-            </a>
+        <div class="row">
+            <div class="col-md-6">
+                <a class="btn btn-success btn-block" onclick="return confirm('Êtes-vous sûr de vouloir modifier cette chambre ?');"
+                   th:href="@{/editroom(id=${RoomWithDetails.id})}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil"
+                         viewBox="0 0 16 16">
+                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5
+                        0 0 1-.168.11l-5 2a.5.5
+                        0 0 1-.65-.65l2-5a.5.5
+                        0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5
+                        1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1
+                        .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-
+                        1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-
+                        .5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                    </svg>
+                    Edit
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a class="btn btn-danger btn-block"
+                   th:href="@{/deleteroom(id=${RoomWithDetails.id})}"
+                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette chambre ?');">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                         viewBox="0 0 16 16">
+                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5
+                        0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5
+                        0 0 0 1 0z"/>
+                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1
+                        0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1
+                        1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5
+                        3h11V2h-11z"/>
+                    </svg>
+                    Delete
+                </a>
+            </div>
         </div>
     </div>
 </div>

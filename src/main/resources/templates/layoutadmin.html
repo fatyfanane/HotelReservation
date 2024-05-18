@@ -8,14 +8,83 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 
+    <style>
+        body {
+            background-color: #e9f4fb; /* Fond bleu clair doux */
+            font-family: 'Arial', sans-serif; /* Utilisation d'une police de caractères courante */
+            padding-top: 20px; /* Espace en haut de la page */
+        }
+
+        .container {
+            border: 1px solid #d1e3f1; /* Bordure bleu clair */
+            border-radius: 10px; /* Coins arrondis */
+            padding: 20px; /* Espacement à l'intérieur du conteneur */
+            background-color: #fff; /* Fond blanc */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+        h1 {
+            color: #5a5a5a; /* Couleur de titre gris foncé */
+            text-align: center; /* Centrer le titre */
+            margin-bottom: 20px; /* Espace en bas du titre */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Couleur de fond de bouton bleu */
+            border-color: #007bff; /* Couleur de bordure identique à la couleur de fond */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Couleur de fond de bouton bleu plus foncé au survol */
+            border-color: #0056b3; /* Couleur de bordure identique à la couleur de fond */
+        }
+
+        .btn-outline-primary {
+            color: #007bff; /* Couleur de texte bleu */
+            border-color: #007bff; /* Couleur de bordure bleu */
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #007bff; /* Couleur de fond bleu au survol */
+            color: #fff; /* Couleur de texte blanc au survol */
+        }
+
+        table {
+            border-collapse: collapse; /* Fusionner les bordures de table */
+            width: 100%; /* Largeur de la table */
+        }
+
+        th, td {
+            border: 1px solid #d1e3f1; /* Bordures des cellules bleu clair */
+            padding: 8px; /* Espacement à l'intérieur des cellules */
+            text-align: left; /* Alignement du texte à gauche */
+        }
+
+        th {
+            background-color: #007bff; /* Fond de cellule bleu pour les en-têtes */
+            color: #fff; /* Texte blanc pour les en-têtes */
+        }
+
+        tr:nth-child(even) {
+            background-color: #f1f9ff; /* Fond de ligne bleu très clair pour les lignes paires */
+        }
+
+        tr:nth-child(odd) {
+            background-color: #fff; /* Fond de ligne blanc pour les lignes impaires */
+        }
+
+        .nav-pills .nav-link {
+            margin: 5px; /* Espace entre les liens de navigation */
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="d-flex justify-content-center">
-        <form method="get" th:action="@{listadmin}">
-            <label>
-                <input type="text" name="search" th:value="${keyword}"/>
-            </label>
+    <div class="d-flex justify-content-center mb-4">
+        <form method="get" th:action="@{listadmin}" class="d-flex">
+
+                <input type="text" name="search" class="form-control me-2 " th:value="${keyword}" placeholder="Rechercher un admin"/>
+
             <button class="btn btn-primary" type="submit">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-search" viewBox="0 0 16 16">
@@ -24,32 +93,33 @@
             </button>
         </form>
     </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="p: ${listAdmin}">
-            <td><a th:href="@{detailsadmin(id=${p.getId()})}" th:text="${p.getId()}"></a></td>
-            <td th:text="${p.getName()}"></td>
-            <td th:text="${p.getPhone()}"></td>
-            <td th:text="${p.getDescription()}"></td>
-        </tr>
-        </tbody>
-    </table>
     <div class="container">
-        <ul class="nav nav-pills">
-            <li class="nav-item me-2" th:each="p, stat: ${pages}">
-                <a th:class="${stat.index} == ${page} ? 'btn btn-primary' : 'btn btn-outline-primary'"
-                   th:text="${stat.index}" th:href="@{listadmin(page=${stat.index},search=${keyword})}"></a>
-            </li>
-        </ul>
-    </div>
+        <h1>Liste des admins</h1>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Téléphone</th>
+                <th>Description</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p: ${listAdmin}">
+                <td><a th:href="@{detailsadmin(id=${p.getId()})}" th:text="${p.getName()}"></a></td>
+                <td th:text="${p.getPhone()}"></td>
+                <td th:text="${p.getDescription()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-center mt-4">
+            <ul class="nav nav-pills">
+                <li class="nav-item me-2" th:each="p, stat: ${pages}">
+                    <a th:class="${stat.index} == ${page} ? 'btn btn-primary' : 'btn btn-outline-primary'"
+                       th:text="${stat.index}" th:href="@{listadmin(page=${stat.index},search=${keyword})}"></a>
+                </li>
+            </ul>
+        </div>
+        </div>
 </div>
 </body>
 </html>

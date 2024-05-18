@@ -8,12 +8,14 @@ import org.springframework.stereotype.Service;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Room;
 import org.xproce.gestiondereservation_hotel.Dao.repositories.RoomRepository;
 
+
 import java.util.List;
 
 @Service
 public class RoomManager implements RoomService {
     @Autowired
     private RoomRepository roomRepository;
+
 
     @Override
     public List<Room> getAllRoom() {
@@ -102,4 +104,5 @@ public class RoomManager implements RoomService {
     public List<Room> getByKeyword(String keyword) {
         return null;
     }
+
 }

@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.com"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="templates" lang="en">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head>
     <meta charset="utf-8"/>
     <title>Modifier la chambre</title>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: #ff85a2;
+            text-align: center;
+        }
+
+        .form-label {
+            color: #ff85a2;
+        }
+
+        .form-control {
+            border-color: #ff85a2;
+        }
+
+        .form-control:focus {
+            border-color: #ff6188;
+            box-shadow: 0 0 5px rgba(255, 133, 162, 0.5);
+        }
+
+        .form-check-input:checked {
+            background-color: #ff85a2;
+            border-color: #ff85a2;
+        }
+
+        .btn-primary {
+            background-color: #ff85a2;
+            border-color: #ff85a2;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff6188;
+            border-color: #ff6188;
+        }
+
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
@@ -24,12 +72,22 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <textarea class="form-control" name="description" th:value="${RoomToBeUpdated.description}"></textarea>
+                <textarea class="form-control" name="description" th:text="${RoomToBeUpdated.description}"></textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Type de chambre</label>
+                <select class="form-select" name="roomType" th:value="${RoomToBeUpdated.roomType}">
+                    <option value="SINGLE">Single</option>
+                    <option value="DOUBLE">Double</option>
+                    <option value="VIP">VIP</option>
+                </select>
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" name="available" th:checked="${RoomToBeUpdated.available}"/>
                 <label class="form-check-label">Disponible</label>
             </div>
+
+
             <button type="submit" class="btn btn-primary">Modifier</button>
         </form>
     </div>

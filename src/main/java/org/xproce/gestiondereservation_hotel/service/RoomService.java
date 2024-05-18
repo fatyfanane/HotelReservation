@@ -1,8 +1,6 @@
 package org.xproce.gestiondereservation_hotel.service;
 
 import org.springframework.data.domain.Page;
-import org.xproce.gestiondereservation_hotel.Dao.entities.Hotel;
-import org.xproce.gestiondereservation_hotel.Dao.entities.Reservation;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Room;
 
 import java.util.List;
@@ -18,4 +16,5 @@ public interface RoomService {
 
     public Page<Room> searchRoom(String keyword, int page, int taille);
     public List<Room> getByKeyword(String keyword);
+
 }

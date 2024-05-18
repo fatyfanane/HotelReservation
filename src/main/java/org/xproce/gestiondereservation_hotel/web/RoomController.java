@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Room;
 import org.xproce.gestiondereservation_hotel.service.RoomService;
 
+import java.util.List;
+
 @Controller
 public class RoomController {
     @Autowired
@@ -80,6 +82,7 @@ public class RoomController {
     @GetMapping("/editroom")
     public String editRoomAction(Model model, @RequestParam(name = "id") Integer id) {
         Room room = roomService.getRoomById(id);
+
         if (room != null) {
             model.addAttribute("RoomToBeUpdated", room);
             return "updateroom";
@@ -89,13 +92,30 @@ public class RoomController {
     }
     @PostMapping("/modifierroom")
     public String modifierRoomAction(Model model,
-                                     @ModelAttribute("room") @Valid Room room,
-                                     BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "updateroom";
+                                     @RequestParam(name = "id") Integer id,
+                                     @RequestParam(name = "roomNum") String roomNum,
+                                     @RequestParam(name = "price") Double price,
+                                     @RequestParam(name = "description") String description,
+                                     @RequestParam(name = "available", defaultValue = "false") boolean available,
+                                     @RequestParam(name = "roomType") String roomType){
+
+        Room room = roomService.getRoomById(id);
+        if (room != null) {
+            // Mettre à jour les champs modifiables avec les nouvelles valeurs
+            room.setRoomNumber(roomNum);
+            room.setPricePerNight(price);
+            room.setDescription(description);
+            room.setAvailable(available);
+
+            room.setRoomType(roomType);
+
+
+            roomService.updateRoom(room);
+            return "redirect:/listroom";
+        } else {
+            return "error";
         }
-        roomService.updateRoom(room);
-        return "redirect:/listroom";
     }
+
 
 }
