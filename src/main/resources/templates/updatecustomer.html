@@ -1,41 +1,85 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.com"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="templates" lang="en">
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Modifier un client</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: #ff85a2;
+            text-align: center;
+        }
+
+        .form-label {
+            color: #ff85a2;
+        }
+
+        .form-control {
+            border-color: #ff85a2;
+        }
+
+        .form-control:focus {
+            border-color: #ff6188;
+            box-shadow: 0 0 5px rgba(255, 133, 162, 0.5);
+        }
+
+        .form-check-input:checked {
+            background-color: #ff85a2;
+            border-color: #ff85a2;
+        }
+
+        .btn-primary {
+            background-color: #ff85a2;
+            border-color: #ff85a2;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff6188;
+            border-color: #ff6188;
+        }
+
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
     <div class="container mt-4">
-        <div class="card">
-            <div class="card-header">Modifier Client</div>
-            <div class="card-body">
-                <form action="/ajouter" method="post">
-                    <input type="hidden" name="id" th:value="${CustomerToBeUpdated.id}">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" name="name" th:value="${CustomerToBeUpdated.name}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" th:value="${CustomerToBeUpdated.phone}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <input type="text" class="form-control" id="description" name="description" th:value="${CustomerToBeUpdated.description}">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" class="form-control" id="email" name="email" th:value="${CustomerToBeUpdated.email}">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Modifier</button>
-                </form>
+        <h2 class="text-center mb-4">Modifier un client</h2>
+        <form action="/ajouter" method="post">
+            <input type="hidden" name="id" th:value="${CustomerToBeUpdated.id}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" th:value="${CustomerToBeUpdated.name}">
             </div>
-        </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone:</label>
+                <input type="text" class="form-control" id="phone" name="phone" th:value="${CustomerToBeUpdated.phone}">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description:</label>
+                <input type="text" class="form-control" id="description" name="description" th:value="${CustomerToBeUpdated.description}">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="text" class="form-control" id="email" name="email" th:value="${CustomerToBeUpdated.email}">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Modifier</button>
+        </form>
     </div>
 </div>
 </body>

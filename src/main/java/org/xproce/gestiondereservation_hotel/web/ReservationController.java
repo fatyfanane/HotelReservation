@@ -7,13 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import org.xproce.gestiondereservation_hotel.Dao.entities.Reservation;
+import org.xproce.gestiondereservation_hotel.Dao.entities.Room;
 import org.xproce.gestiondereservation_hotel.service.ReservationService;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Controller
 public class ReservationController {
@@ -22,37 +24,36 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @PostMapping("/savereservation")
-    public String ajouterreservation(Model model,
-                                     @Valid Reservation reservation  ,
-                                     BindingResult bindingResult) {
+    public String ajouterreservation(Model model, @Valid Reservation reservation, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "ajouterhotel";
+            model.addAttribute("reservation", reservation);
+            return "ajouterreservation";
         }
         reservationService.addReservation(reservation);
-        return "redirect:/indexpage";
+        return "redirect:/listreservation";
     }
 
+    @PostMapping("/submitReservation")
+    public String submitReservation(@Valid @ModelAttribute("reservation") Reservation reservation, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("reservation", reservation);
+            return "ajouterreservation"; // Ensure this template exists
+        }
+        reservationService.addReservation(reservation);
+        return "redirect:/listreservation";
+    }
 
     @GetMapping("indexlayoutreservation")
     public String acc() {
         return "redirect:/listreservation";
     }
 
-
-
-
-
-
-
     @GetMapping("/detailsreservation")
-    public String details(Model model,
-                          @RequestParam(name = "id") Integer id) {
+    public String details(Model model, @RequestParam(name = "id") Integer id) {
         Reservation reservation = reservationService.getReservationById(id);
         model.addAttribute("reservationWithDetails", reservation);
         return "/detailreservation";
     }
-
-
 
     @GetMapping("/deletereservation")
     public String deletereservation(@RequestParam(name = "id") Integer id) {
@@ -63,18 +64,18 @@ public class ReservationController {
         }
     }
 
-
     @PostMapping("/ajouterreservationn")
     public String modifierreservationAction(Model model,
-                                            @RequestParam(name = "id") Integer id,
-                                            @RequestParam(name = "totalePrice") Double totalePrice,
+                                            @RequestParam(name = "id") Integer id, @RequestParam(name = "room") Room room,
+
                                             @RequestParam(name = "startDate") LocalDate startDate,
                                             @RequestParam(name = "endDate") LocalDate endDate) {
-        Reservation reservation  = reservationService.getReservationById(id);
+        Reservation reservation = reservationService.getReservationById(id);
         if (reservation != null) {
             reservation.setEndDate(endDate);
+            reservation.setRoom(room);
             reservation.setStartDate(startDate);
-            reservation.setTotalPrice(totalePrice);
+
             reservationService.updateReservation(reservation);
             return "redirect:/listreservation";
         } else {
@@ -82,28 +83,23 @@ public class ReservationController {
         }
     }
 
-
-
     @GetMapping("/ajouterreservation")
-    public String ajouterreservation(Model model) {
-        model.addAttribute("Reservation", new Reservation());
+    public String showReservationForm(Model model) {
+        model.addAttribute("reservation", new Reservation());
         return "ajouterreservation";
     }
 
-
-
     @PostMapping("/ajouterrOnce")
     public String ajouterareservation(Model model,
-                                      @Valid Reservation reservation   ,
+                                      @Valid Reservation reservation,
                                       BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "ajouterreclamation";
+            model.addAttribute("reservation", reservation);
+            return "ajouterreservation";
         }
         reservationService.addReservation(reservation);
         return "redirect:/listreservation";
     }
-
-
 
     @GetMapping("/listreservation")
     public String listreservation(Model model,
@@ -111,20 +107,25 @@ public class ReservationController {
                                   @RequestParam(name = "taille", defaultValue = "6") int taille,
                                   @RequestParam(name = "search", defaultValue = "") String keyword) {
         Page<Reservation> reservation = reservationService.searchReservation(keyword, page, taille);
-        model.addAttribute("listreservation", reservation.getContent());
 
-        int[] pages = new int[reservation.getTotalPages()];
-        model.addAttribute("pages", pages);
-        model.addAttribute("keyword", keyword);
-        model.addAttribute("page", page);
+        if (reservation != null) {
+            model.addAttribute("listreservation", reservation.getContent());
+            int[] pages = new int[reservation.getTotalPages()];
+            model.addAttribute("pages", pages);
+            model.addAttribute("keyword", keyword);
+            model.addAttribute("page", page);
+        } else {
+            model.addAttribute("listreservation", new ArrayList<>());
+            model.addAttribute("pages", new int[0]);
+            model.addAttribute("keyword", keyword);
+            model.addAttribute("page", page);
+        }
         return "layoutreservation";
     }
 
-
-
     @GetMapping("/editreservation")
     public String editreservationAction(Model model, @RequestParam(name = "id") Integer id) {
-        Reservation reservation  = reservationService.getReservationById(id);
+        Reservation reservation = reservationService.getReservationById(id);
         if (reservation != null) {
             model.addAttribute("reservationToBeUpdated", reservation);
             return "updatereservation";
@@ -132,8 +133,4 @@ public class ReservationController {
             return "error";
         }
     }
-
 }
-
-
-

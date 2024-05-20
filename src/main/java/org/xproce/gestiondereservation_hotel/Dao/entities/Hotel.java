@@ -3,6 +3,8 @@ package org.xproce.gestiondereservation_hotel.Dao.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +22,10 @@ public class Hotel {
     private String email;
     private String description;
 
+
     @ManyToOne
     private Admin admin;
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms;
 
 }

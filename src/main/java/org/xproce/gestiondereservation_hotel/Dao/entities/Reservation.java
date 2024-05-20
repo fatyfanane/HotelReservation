@@ -1,6 +1,9 @@
 package org.xproce.gestiondereservation_hotel.Dao.entities;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -16,12 +19,28 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Integer id;
+    @NotNull
     private LocalDate startDate;
+
+    @NotNull
     private LocalDate endDate;
-    private Double totalPrice;
+
+
+
+    @NotNull
+    @Size(min = 2, max = 30)
+    private String name;
+
+    @NotNull
+    @Future
+    private LocalDate date;
+
     @ManyToOne
     private Customer customer;
+    @ManyToOne
+    private Room room;
 
-    @OneToOne(mappedBy = "reservation")
-    private Facture facture;
+
+
+
 }

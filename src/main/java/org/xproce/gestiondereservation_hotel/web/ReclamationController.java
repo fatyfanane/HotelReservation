@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Reclamation;
-import org.xproce.gestiondereservation_hotel.service.FactureService;
 import org.xproce.gestiondereservation_hotel.service.ReclamationService;
 
 @Controller

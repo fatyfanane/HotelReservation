@@ -20,6 +20,13 @@ layout:decorate="templates" lang="en">
                     <span class="text-danger" th:errors="${room.roomNumber}"></span>
                 </div>
                 <div class="mb-3">
+                    <label for="hotel" class="form-label">Hôtel</label>
+                    <select class="form-select w-50" id="hotel" name="hotel" th:field="*{hotel.id}">
+                        <option th:each="hotel : ${hotel}" th:value="${hotel.id}" th:text="${hotel.name}"></option>
+                    </select>
+                    <span class="text-danger" th:if="${#fields.hasErrors('hotel')}" th:errors="*{hotel}"></span>
+                </div>
+                <div class="mb-3">
                     <label for="pricePerNight" class="form-label">Prix par nuit</label>
                     <input type="number" class="form-control w-50" id="pricePerNight" name="pricePerNight" th:field="*{pricePerNight}">
                     <span class="text-danger" th:if="${#fields.hasErrors('pricePerNight')}" th:errors="*{pricePerNight}"></span>
@@ -28,6 +35,11 @@ layout:decorate="templates" lang="en">
                     <label for="description" class="form-label">Description</label>
                     <textarea class="form-control w-50" id="description" name="description" th:field="*{description}"></textarea>
                     <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="imageUrl" class="form-label">URL de l'image</label>
+                    <input type="text" class="form-control w-50" id="imageUrl" name="imageUrl">
+                    <!-- Ajoutez un message d'erreur si nécessaire -->
                 </div>
                 <div class="mb-3">
                     <label for="roomType" class="form-label">Type de chambre</label>

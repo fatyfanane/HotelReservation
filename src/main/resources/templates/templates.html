@@ -27,8 +27,8 @@
                                     <li><a class="btn-dark text-black" th:href="@{indexpage}">List Hotel</a> |</li>
                                     <li><a class="btn-dark text-black" th:href="@{listadmin}">List Admin</a> |</li>
                                     <li><a class="btn-dark text-black" th:href="@{listcustomer}">List Customer</a> |</li>
-                                    <li><a class="btn-dark text-black" th:href="@{listfacture}">List Facture</a> |</li>
                                     <li><a class="btn-dark text-black" th:href="@{listroom}">List Room</a> |</li>
+                                    <li><a class="btn-dark text-black" th:href="@{listreservation}">List Reservation</a> |</li>
                                     <li class="nav-item dropdown">
                                         <a class="btn-dark text-black" href="#" id="navbarDropdownMenuLink" role="button"
                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -40,6 +40,7 @@
                                             <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajouterhotel}">Add hotel</a></li>
                                             <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajoutercustomer}">Add Customer</a></li>
                                             <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajouterroom}">Add Room</a></li>
+                                            <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajouterreservation}">Add Reservation</a></li>
                                             <li><a class="dropdown-item text-black" th:href="@{indexpage}">Search</a></li>
                                         </ul>
                                     </li>
@@ -72,6 +73,7 @@
                         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
                         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
                         <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Reports</a>
+
                     </div>
                     <div class="border-t border-gray-700 pb-3 pt-4">
                         <div class="flex items-center px-5">
@@ -94,6 +96,7 @@
                             <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Your Profile</a>
                             <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Settings</a>
                             <a href="#" class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white">Sign out</a>
+
                         </div>
                     </div>
                 </div>
@@ -122,6 +125,9 @@
         </div>
     </div>
 </div>
+<footer>
+
+</footer>
 
 </body>
 </html>

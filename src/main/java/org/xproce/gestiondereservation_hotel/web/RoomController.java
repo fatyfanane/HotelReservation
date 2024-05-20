@@ -7,15 +7,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.xproce.gestiondereservation_hotel.Dao.entities.Hotel;
+import org.xproce.gestiondereservation_hotel.Dao.entities.Reservation;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Room;
+import org.xproce.gestiondereservation_hotel.service.HotelService;
+import org.xproce.gestiondereservation_hotel.service.ReservationService;
 import org.xproce.gestiondereservation_hotel.service.RoomService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 public class RoomController {
     @Autowired
     private RoomService roomService;
+    @Autowired
+    private HotelService hotelService;
 
     @PostMapping("/saveroom")
     public String ajouterRoom(Model model,
@@ -63,6 +70,9 @@ public class RoomController {
     @GetMapping("/ajouterroom")
     public String showAjouterRoomForm(Model model) {
         model.addAttribute("room", new Room());
+        List<Hotel> hotels=hotelService.getAllHotel();
+        model.addAttribute("hotel",hotels) ;
+
         return "ajouterroom";
     }
 
@@ -76,6 +86,8 @@ public class RoomController {
         model.addAttribute("pages", new int[roomPage.getTotalPages()]);
         model.addAttribute("currentPage", page);
         model.addAttribute("keyword", keyword);
+
+
         return "indexlayoutroom";
     }
 
@@ -91,10 +103,11 @@ public class RoomController {
         }
     }
     @PostMapping("/modifierroom")
-    public String modifierRoomAction(Model model,
+    public String modifierRoomAction(Model model,@RequestParam(name = "id") Hotel hotel,
                                      @RequestParam(name = "id") Integer id,
                                      @RequestParam(name = "roomNum") String roomNum,
                                      @RequestParam(name = "price") Double price,
+                                     @RequestParam(name = "imageUrl") String imageUrl,
                                      @RequestParam(name = "description") String description,
                                      @RequestParam(name = "available", defaultValue = "false") boolean available,
                                      @RequestParam(name = "roomType") String roomType){
@@ -105,11 +118,18 @@ public class RoomController {
             room.setRoomNumber(roomNum);
             room.setPricePerNight(price);
             room.setDescription(description);
+            room.setImageUrl(imageUrl);
             room.setAvailable(available);
+            room.setHotel(hotel);
+
+
+            hotel.getRooms().add(room);
+
+
 
             room.setRoomType(roomType);
 
-
+            hotelService.updateHotel(hotel);
             roomService.updateRoom(room);
             return "redirect:/listroom";
         } else {

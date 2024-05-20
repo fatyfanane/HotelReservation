@@ -7,48 +7,90 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f5e8f8; /* Fond lavande doux */
-            font-family: 'Arial', sans-serif; /* Utilisation d'une police de caractères courante */
-            padding-top: 20px; /* Espace en haut de la page */
+            background-color: #f8e1f5; /* Light pink background color */
+            font-family: 'Arial', sans-serif; /* Use a common font */
+            padding-top: 20px;
         }
 
         .container {
-            border: 1px solid #f7d4eb; /* Bordure rose doux */
-            border-radius: 10px; /* Coins arrondis */
-            padding: 20px; /* Espacement à l'intérieur du conteneur */
-            background-color: #fff; /* Fond blanc */
+            margin-top: 50px; /* Adjust as needed */
+            border: 1px solid #111827; /* Soft pink border */
+            border-radius: 10px; /* Rounded corners for container */
+            padding: 20px; /* Add padding inside container */
+            background-color: #fff; /* White background */
+            max-width: 500px; /* Max width for container */
+            margin: 50px auto; /* Center align the container */
         }
 
         h1 {
-            color: #b367a1; /* Couleur de titre lavande clair */
-            text-align: center; /* Centrer le titre */
-            margin-bottom: 20px; /* Espace en bas du titre */
+            color: #751A3D; /* Light purple heading color */
+            text-align: center;
+            margin-bottom: 20px;
         }
 
-        .btn-success, .btn-danger, .btn-primary {
-            background-color: #ff85a2; /* Couleur de fond de bouton rose clair */
-            border-color: #ff85a2; /* Couleur de bordure identique à la couleur de fond */
-        }
-
-        .btn-success:hover, .btn-danger:hover, .btn-primary:hover {
-            background-color: #ff6188; /* Couleur de fond de bouton rose plus foncé au survol */
-            border-color: #ff6188; /* Couleur de bordure identique à la couleur de fond */
+        p {
+            color: #111827; /* Light purple paragraph color */
+            margin-bottom: 10px;
         }
 
         .btn {
-            color: #fff; /* Couleur de texte blanc pour les boutons */
+            color: #fff; /* White text color */
+            font-weight: bold; /* Bold text */
+            transition: background-color 0.3s; /* Smooth transition */
         }
 
-        svg {
-            margin-right: 5px; /* Espacement entre l'icône et le texte */
+        .btn:hover {
+            color: #fff; /* White text color on hover */
         }
 
-        .mt-3 {
-            margin-top: 20px; /* Espacement en haut du bouton de retour */
+        .btn-success {
+            background-color: #28a745; /* Green button background color */
+            border-color: #28a745; /* Green button border color */
+        }
+
+        .btn-success:hover {
+            background-color: #218838; /* Darker green button background color on hover */
+            border-color: #1e7e34; /* Darker green button border color on hover */
+        }
+
+        .btn-danger {
+            background-color: #dc3545; /* Red button background color */
+            border-color: #dc3545; /* Red button border color */
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333; /* Darker red button background color on hover */
+            border-color: #bd2130; /* Darker red button border color on hover */
+        }
+
+        .btn-primary {
+            background-color: #007bff; /* Blue button background color */
+            border-color: #007bff; /* Blue button border color */
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3; /* Darker blue button background color on hover */
+            border-color: #0056b3; /* Darker blue button border color on hover */
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        .btn svg {
+            margin-right: 5px;
+        }
+
+        /* Centered button */
+        .center-button {
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
+<div class="container">
 
     <h1>Customer Details</h1>
     <p>ID: <span th:text="${customerWithDetails.id}"></span></p>
@@ -91,9 +133,10 @@
                 Delete
             </a>
         </div>
+        <div class="center-button">
+            <a class="btn btn-primary mt-3" th:href="@{/listcustomer}">Go to Customer List</a>
+        </div>
     </div>
-
-    <a class="btn btn-primary mt-3" th:href="@{/listcustomer}">Go to Customer List</a>
-
+    </div>
 </body>
 </html>

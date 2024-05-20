@@ -75,6 +75,11 @@
                 <textarea class="form-control" name="description" th:text="${RoomToBeUpdated.description}"></textarea>
             </div>
             <div class="mb-3">
+                <label class="form-label">URL de l'image</label>
+                <input type="text" class="form-control" name="imageUrl">
+            </div>
+
+            <div class="mb-3">
                 <label class="form-label">Type de chambre</label>
                 <select class="form-select" name="roomType" th:value="${RoomToBeUpdated.roomType}">
                     <option value="SINGLE">Single</option>

@@ -1,36 +1,87 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.com"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="templates" lang="en">
+<html xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>edit Admin</title>
+    <title>Edit Admin</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css">
+    <script src="webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body {
+            background-color: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 500px;
+        }
+
+        h2 {
+            color: #ff85a2;
+            text-align: center;
+        }
+
+        .form-label {
+            color: #ff85a2;
+        }
+
+        .form-control {
+            border-color: #ff85a2;
+        }
+
+        .form-control:focus {
+            border-color: #ff6188;
+            box-shadow: 0 0 5px rgba(255, 133, 162, 0.5);
+        }
+
+        .form-check-input:checked {
+            background-color: #ff85a2;
+            border-color: #ff85a2;
+        }
+
+        .btn-primary {
+            background-color: #ff85a2;
+            border-color: #ff85a2;
+        }
+
+        .btn-primary:hover {
+            background-color: #ff6188;
+            border-color: #ff6188;
+        }
+
+    </style>
 </head>
 
 <body>
-<div layout:fragment="content">
-    <div class="p-3 m-2">
-        <div class="card">
-            <div class="card-header">Admin edit</div>
-            <div class="card-body">
+<div layout:fragment="content" >
+    <div class="container mt-4">
+    <h2 class="text-center mb-4">Edit Admin</h2>
 
-                <div class="form-group">
-                    <form class="form-inline" action="/ajouterr" method="post">
-                        <input type="hidden" name="id" th:value="${AdminToBeUpdated.id}">
-                        Title: <input class="form-control" name="name" type="text"
-                                      th:value="${AdminToBeUpdated.name}">
-                        Phone: <input class="form-control" name="phone" type="text"
-                                      th:value="${AdminToBeUpdated.phone}">
-                        Designation: <input class="form-control" name="description" type="text"
-                                            th:value="${AdminToBeUpdated.description}">
-                        <br>
-                        <input class="btn btn-primary form-control" type="submit" value="Modifier">
-                    </form>
+            <form action="/ajouterr" method="post">
+                <input type="hidden" name="id" th:value="${AdminToBeUpdated.id}">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" th:value="${AdminToBeUpdated.name}">
                 </div>
-            </div>
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone:</label>
+                    <input type="text" class="form-control" id="phone" name="phone" th:value="${AdminToBeUpdated.phone}">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <input type="text" class="form-control" id="description" name="description" th:value="${AdminToBeUpdated.description}">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Modifier</button>
+            </form>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>

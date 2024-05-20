@@ -20,6 +20,10 @@ public class Room {
     private Boolean available;
     private String description;
     private String roomType;
+    public String imageUrl;
+    @ManyToOne
+    @JoinColumn(name = "hotel_id")
+    private Hotel hotel;
 
 
 
