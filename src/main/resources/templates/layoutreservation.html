@@ -1,129 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml"
+      layout:decorate="templates" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gestion des reservations</title>
+    <title>Liste des Réservations</title>
     <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.min.css"/>
     <script type="text/javascript" src="/webjars/bootstrap/5.3.3/js/bootstrap.bundle.js"></script>
-    <script type="text/javascript" src="/webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-pink-100">
-<div class="p-3 m-2">
-    <div class="card">
-        <div class="min-h-full">
-            <nav class="bg-white shadow">
-                <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div class="flex h-16 items-center justify-between">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0">
-                                <img class="h-8 w-8" src="https://emojicdn.elk.sh/hotel" alt="Cute Hotel">
-                            </div>
-                            <div class="hidden md:block">
-                                <div class="ml-10 flex items-baseline space-x-4">
-                                    <a class="btn-dark text-black" th:href="@{indexpage}">List Hotel</a>
-                                    <a class="btn-dark text-black" th:href="@{listadmin}">List Admin</a>
-                                    <a class="btn-dark text-black" th:href="@{listcustomer}">List Customer</a>
-                                    <a class="btn-dark text-black" th:href="@{listfacture}">List Facture</a>
-                                    <a class="btn-dark text-black" th:href="@{listroom}">List Room</a>
-                                    <a class="btn-dark text-black" th:href="@{listreservation}">List Reservation</a>
-                                    <li class="nav-item dropdown">
-                                        <a class="btn-dark text-black" href="#" id="navbarDropdownMenuLink" role="button"
-                                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Manage <span class="ml-1">&#9662;</span>
-                                        </a>
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <li><a class="dropdown-item text-black" sec:authorize="hasRole('managetable')" th:href="@{ajouteradmin}">Add Admin</a></li>
-                                            <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajouterhotel}">Add hotel</a></li>
-                                            <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajoutercustomer}">Add Customer</a></li>
-                                            <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajouterroom}">Add Room</a></li>
-                                            <li><a class="dropdown-item text-black" th:href="@{ajouterreservation}">Add Reservation</a></li>
-                                            <li><a class="dropdown-item text-black" th:href="@{indexpage}">Search</a></li>
-                                        </ul>
-                                    </li>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="hidden md:block">
-                            <div class="ml-4 flex items-center md:ml-6">
-                                <button type="button" class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                                    <span class="absolute -inset-1.5"></span>
-                                    <span class="sr-only">View notifications</span>
-                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                                    </svg>
-                                </button>
-                                <div class="absolute right-0 z-10 mt-1 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-                                    <li sec:authorize="isAuthenticated()">
-                                        <a class="btn-dark" th:href="@{/logout}">Logout</a></li>
-                                    <li sec:authorize="!isAuthenticated()">
-                                        <a class="btn-dark" th:href="@{/login}">Log In</a></li>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </nav>
-            <header class="bg-pink-200 shadow">
-                <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <h1 class="text-3xl font-bold tracking-tight text-white">Reservation Management</h1>
-                </div>
-            </header>
-            <main>
-                <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                    <form th:action="@{/listreservation}" method="get">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search reservations" name="search" th:value="${keyword}">
-                            <button class="btn btn-primary" type="submit">Search</button>
-                        </div>
-                    </form>
-                    <div class="d-flex justify-content-between align-items-center mt-3">
-                        <h2 class="text-2xl font-semibold">Reservations</h2>
-                        <a class="btn btn-success" th:href="@{/ajouterreservation}">Add Reservation</a>
-                    </div>
-                    <table class="table table-striped mt-3">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Total Price</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="reservation : ${listreservation}">
-                            <td th:text="${reservation.id}"></td>
-                            <td th:text="${reservation.totalPrice}"></td>
-                            <td th:text="${reservation.startDate}"></td>
-                            <td th:text="${reservation.endDate}"></td>
-                            <td>
-                                <a class="btn btn-info" th:href="@{/detailsreservation(id=${reservation.id})}">Details</a>
-                                <a class="btn btn-warning" th:href="@{/editreservation(id=${reservation.id})}">Edit</a>
-                                <a class="btn btn-danger" th:href="@{/deletereservation(id=${reservation.id})}" onclick="return confirm('Are you sure?')">Delete</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <nav>
-                        <ul class="pagination">
-                            <li th:each="i : ${pages}" class="page-item" th:classappend="${page == i} ? 'active'">
-                                <a class="page-link" th:href="@{/listreservation(page=${i}, keyword=${keyword})}" th:text="${i + 1}"></a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </main>
-        </div>
-        <div class="card-body">
-            <section layout:fragment="content"></section>
-        </div>
-        <div class="card-footer" align="center">&copy; copyright: FUFU 2024<br/> X - Casablanca- Morocco</br>
-            fatimazahrafanane72@gmail.com
-        </div>
+<body>
+<div layout:fragment="content">
+    <div class="container">
+        <h2 class="text-center my-4"> Liste des Réservations</h2>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Name</th>
+                <th>Date</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="reservation : ${listreservation}">
+                <td th:text="${reservation.getId()}"></td>
+                <td th:text="${reservation.startDate}"></td>
+                <td th:text="${reservation.endDate}"></td>
+                <td th:text="${reservation.name}"></td>
+                <td th:text="${reservation.date}"></td>
+                <td>
+                    <a class="btn btn-info"  th:href="@{/detailsreservation(id=${reservation.id})}">Details</a>
+                    <a class="btn btn-warning" sec:authorize="hasAnyRole('admin','managetable')"  th:href="@{/editreservation(id=${reservation.id})}">Edit</a>
+                    <a class="btn btn-danger" sec:authorize="hasAnyRole('admin','managetable')"  th:href="@{/deletereservation(id=${reservation.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
 </div>
-<footer></footer>
 </body>
 </html>

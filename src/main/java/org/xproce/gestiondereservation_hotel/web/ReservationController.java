@@ -13,15 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Reservation;
 import org.xproce.gestiondereservation_hotel.Dao.entities.Room;
 import org.xproce.gestiondereservation_hotel.service.ReservationService;
+import org.xproce.gestiondereservation_hotel.service.RoomService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ReservationController {
 
     @Autowired
     private ReservationService reservationService;
+    private RoomService roomService;
 
     @PostMapping("/savereservation")
     public String ajouterreservation(Model model, @Valid Reservation reservation, BindingResult bindingResult) {
@@ -65,27 +68,28 @@ public class ReservationController {
     }
 
     @PostMapping("/ajouterreservationn")
-    public String modifierreservationAction(Model model,
-                                            @RequestParam(name = "id") Integer id, @RequestParam(name = "room") Room room,
-
+    public String modifierreservationAction(Model model, @Valid Room room ,
+                                            @RequestParam(name = "id") Integer id,
+                                            @RequestParam(name = "name") String name,
+                                            @RequestParam(name = "date") LocalDate date,
                                             @RequestParam(name = "startDate") LocalDate startDate,
                                             @RequestParam(name = "endDate") LocalDate endDate) {
-        Reservation reservation = reservationService.getReservationById(id);
-        if (reservation != null) {
-            reservation.setEndDate(endDate);
-            reservation.setRoom(room);
-            reservation.setStartDate(startDate);
+        Reservation reservation = new Reservation();
 
+            reservation.setEndDate(endDate);
+            reservation.setName(name);
+            reservation.setDate(date);
+            reservation.setStartDate(startDate);
+            reservation.setRoom(room);
             reservationService.updateReservation(reservation);
             return "redirect:/listreservation";
-        } else {
-            return "error";
-        }
+
     }
 
     @GetMapping("/ajouterreservation")
     public String showReservationForm(Model model) {
         model.addAttribute("reservation", new Reservation());
+
         return "ajouterreservation";
     }
 
@@ -102,24 +106,11 @@ public class ReservationController {
     }
 
     @GetMapping("/listreservation")
-    public String listreservation(Model model,
-                                  @RequestParam(name = "page", defaultValue = "0") int page,
-                                  @RequestParam(name = "taille", defaultValue = "6") int taille,
-                                  @RequestParam(name = "search", defaultValue = "") String keyword) {
-        Page<Reservation> reservation = reservationService.searchReservation(keyword, page, taille);
+    public String listReservation(Model model
+                                 ) {
+        List<Reservation> reservations = reservationService.searchReservation();
+        model.addAttribute("listreservation", reservations);
 
-        if (reservation != null) {
-            model.addAttribute("listreservation", reservation.getContent());
-            int[] pages = new int[reservation.getTotalPages()];
-            model.addAttribute("pages", pages);
-            model.addAttribute("keyword", keyword);
-            model.addAttribute("page", page);
-        } else {
-            model.addAttribute("listreservation", new ArrayList<>());
-            model.addAttribute("pages", new int[0]);
-            model.addAttribute("keyword", keyword);
-            model.addAttribute("page", page);
-        }
         return "layoutreservation";
     }
 

@@ -24,11 +24,12 @@
                             <div class="hidden md:block">
                                 <div class="ml-10 flex items-baseline space-x-4">
                                     <!-- Modification de la classe text-gray-900 à text-white -->
-                                    <li><a class="btn-dark text-black" th:href="@{indexpage}">List Hotel</a> |</li>
-                                    <li><a class="btn-dark text-black" th:href="@{listadmin}">List Admin</a> |</li>
-                                    <li><a class="btn-dark text-black" th:href="@{listcustomer}">List Customer</a> |</li>
-                                    <li><a class="btn-dark text-black" th:href="@{listroom}">List Room</a> |</li>
-                                    <li><a class="btn-dark text-black" th:href="@{listreservation}">List Reservation</a> |</li>
+                                    <li ><a class="btn-dark text-black" th:href="@{indexpage}"> Hotel</a> |</li>
+                                    <li sec:authorize="hasRole('managetable')"><a class="btn-dark text-black"  th:href="@{listadmin}"> Admin</a> |</li>
+                                    <li sec:authorize="hasAnyRole('admin','managetable')" ><a class="btn-dark text-black"  th:href="@{listcustomer}"> Customer</a> |</li>
+                                    <li sec:authorize="hasAnyRole('admin','managetable')" ><a class="btn-dark text-black" th:href="@{listroom}"> Rooms</a> |</li>
+                                    <li><a class="btn-dark text-black" th:href="@{listreservation}"> Reservation</a> |</li>
+                                    <li><a class="btn-dark text-black" th:href="@{about}">About</a> |</li>
                                     <li class="nav-item dropdown">
                                         <a class="btn-dark text-black" href="#" id="navbarDropdownMenuLink" role="button"
                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

@@ -2,7 +2,7 @@ package org.xproce.gestiondereservation_hotel.Dao.entities;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Future;
+
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
@@ -25,14 +25,14 @@ public class Reservation {
     @NotNull
     private LocalDate endDate;
 
-
+    private String description;
 
     @NotNull
     @Size(min = 2, max = 30)
     private String name;
 
     @NotNull
-    @Future
+
     private LocalDate date;
 
     @ManyToOne

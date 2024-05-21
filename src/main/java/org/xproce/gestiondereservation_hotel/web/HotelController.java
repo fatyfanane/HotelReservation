@@ -32,6 +32,10 @@ public class HotelController {
     public String acc() {
         return "redirect:/indexpage";
     }
+    @GetMapping("/about")
+        public String about() {
+            return "about";
+        }
 
     @GetMapping("")
     public String accu() {

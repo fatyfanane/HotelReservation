@@ -14,5 +14,5 @@ public interface ReservationService {
     Reservation getReservationById(Integer id);
     Boolean deleteReservationById(Integer id);
 
-    Page<Reservation> searchReservation(String keyword, int page, int taille);
+    public List<Reservation> searchReservation();
 }

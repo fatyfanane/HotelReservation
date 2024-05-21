@@ -17,10 +17,7 @@
         <div class="card-body">
             <form th:action="@{/ajouterreservationn}" th:object="${reservationToBeUpdated}" method="post">
                 <input type="hidden" th:field="*{id}"/>
-                <div class="form-group">
-                    <label for="totalePrice">Total Price</label>
-                    <input type="number" step="0.01" th:field="*{totalPrice}" class="form-control" id="totalePrice" placeholder="Enter total price">
-                </div>
+
                 <div class="form-group">
                     <label for="startDate">Start Date</label>
                     <input type="date" th:field="*{startDate}" class="form-control" id="startDate" placeholder="Enter start date">
