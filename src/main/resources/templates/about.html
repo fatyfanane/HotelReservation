@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.com"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="templates" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.com" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="templates">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Hotel Reservation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #ffd6e7; /* Light Pink */
         }
+
         .container {
             max-width: 800px;
             margin: 20px auto;
@@ -21,26 +20,32 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         h1 {
-            color: #007bff;
+            color: #ff6b81; /* Pink */
         }
+
         p {
             line-height: 1.6;
+        }
+
+        ul {
+            color: #ff6b81; /* Pink */
         }
     </style>
 </head>
 <body>
 <div class="container" layout:fragment="content">
     <h1>About Us - Hotel Reservation</h1>
-    <p>Welcome to Hotel Reservation, your premier destination for finding the perfect accommodations for your travels. Our mission is to provide a seamless booking experience, offering a wide range of hotels to suit every traveler's needs .</p>
-    <p>With Hotel Reservation, you can:</p>
-    <ul>
-        <li>Search for hotels worldwide</li>
-        <li>Read Description </li>
-        <li>Book securely and conveniently online</li>
-    </ul>
-    <p>Whether you're planning a family vacation, a business trip, or a romantic getaway, we've got you covered. Our team is dedicated to ensuring that your stay is comfortable, enjoyable, and hassle-free.</p>
-    <p>Thank you for choosing Hotel Reservation. We look forward to helping you make unforgettable memories on your next journey!</p>
+    <p>Welcome to Hotel Reservation, your premier destination for finding the perfect accommodations for your travels.</p>
+    <p>Our mission is to provide a seamless booking experience, offering a wide range of hotels with available rooms to reserve. Whether you're seeking a cozy room for a solo adventure or a spacious suite for a family vacation, we have options to suit every traveler's needs.</p>
+    <p>With Hotel Reservation, you can easily browse through various hotels, explore available room types, and securely reserve your preferred accommodation online. Our platform ensures convenience and reliability throughout the booking process.</p>
+    <p>Whether you're planning a spontaneous getaway or a meticulously organized trip, we're here to assist you in finding the ideal lodging. Our dedicated team works tirelessly to ensure that your stay is comfortable, enjoyable, and tailored to your preferences.</p>
+    <p>Thank you for choosing Hotel Reservation. We look forward to helping you create unforgettable memories on your next journey!</p>
 </div>
+<!-- Keep the navbar and footer -->
+<footer layout:fragment="footer">
+    <p>&copy; 2024 Hotel Reservation. All rights reserved.</p>
+</footer>
 </body>
 </html>

@@ -9,7 +9,7 @@
     <script type="text/javascript" src="/webjars/bootstrap/5.3.3/js/bootstrap.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-pink-100"> <!-- Modification de la classe bg-black à bg-pink-100 -->
+<body class="bg-pink-100">
 <div class="p-3 m-2">
     <div class="card">
         <div class="min-h-full">
@@ -23,7 +23,8 @@
                             </div>
                             <div class="hidden md:block">
                                 <div class="ml-10 flex items-baseline space-x-4">
-                                    <!-- Modification de la classe text-gray-900 à text-white -->
+
+
                                     <li ><a class="btn-dark text-black" th:href="@{indexpage}"> Hotel</a> |</li>
                                     <li sec:authorize="hasRole('managetable')"><a class="btn-dark text-black"  th:href="@{listadmin}"> Admin</a> |</li>
                                     <li sec:authorize="hasAnyRole('admin','managetable')" ><a class="btn-dark text-black"  th:href="@{listcustomer}"> Customer</a> |</li>
@@ -36,7 +37,8 @@
                                             Manage <span class="ml-1">&#9662;</span>
                                         </a>
                                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <!-- Modification de la classe text-black à text-white -->
+
+
                                             <li><a class="dropdown-item text-black"  sec:authorize="hasRole('managetable')" th:href="@{ajouteradmin}">Add Admin</a></li>
                                             <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajouterhotel}">Add hotel</a></li>
                                             <li><a class="dropdown-item text-black" sec:authorize="hasAnyRole('admin','managetable')" th:href="@{ajoutercustomer}">Add Customer</a></li>
@@ -103,17 +105,19 @@
                 </div>
             </nav>
 
-            <!-- Modification de la classe bg-black à bg-pink-200 -->
+
             <header class="bg-pink-200 shadow">
                 <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <!-- Modification de la classe text-gray-900 à text-white -->
+
+
                     <h1 class="text-3xl font-bold tracking-tight text-white">FU-HOTEL</h1>
                 </div>
             </header>
 
             <main>
                 <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                    <!-- Ajoutez ici le contenu de votre tableau ou d'autres éléments -->
+
+
                 </div>
             </main>
         </div>
