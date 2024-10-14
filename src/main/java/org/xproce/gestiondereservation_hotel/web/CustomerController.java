@@ -68,12 +68,14 @@ public class CustomerController {
                                           @RequestParam(name = "id") Integer id,
                                           @RequestParam(name = "name") String name,
                                           @RequestParam(name = "phone") String phone,
-                                          @RequestParam(name = "description") String description) {
+                                          @RequestParam(name = "description") String description,
+                                          @RequestParam(name = "email") String email ) {
             Customer customer  = customerService.getCustomerById(id);
             if (customer != null) {
                 customer.setName(name);
                 customer.setPhone(phone);
                 customer.setDescription(description);
+                customer.setEmail(email);
                 customerService.updateCustomer(customer);
                 return "redirect:/listcustomer";
             } else {
